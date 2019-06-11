@@ -7,18 +7,18 @@
 <table class="table table-sm table-striped">
     <tr>
     <th>Name</th>
-    <td>{{movie?.name}}</td>
+    <td>{{movie?.name || 'Loading Data..'}}</td>
     </tr>
     <tr>
     <th>Category</th>
-    <td>{{movie?.category}}</td>
+    <td>{{movie?.category || 'Loading Data..'}}</td>
     </tr>
     <tr>
     <th>Description</th>
-    <td>{{movie?.description}}</td>
+    <td>{{movie?.description || 'Loading Data..'}}</td>
     </tr>
     <tr>
       <th>Price</th>
-    <td>{{movie?.price}}</td>
+    <td>{{movie?.price || 'Loading Data..'}}</td>
     </tr>
   </table>
