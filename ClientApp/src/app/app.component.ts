@@ -1,3 +1,5 @@
+import { Movie } from './models/movie.model';
+import { Repository } from './models/repository';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,4 +9,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Web Development with ASP.NET Core and Angular';
+  constructor(private repo: Repository) {}
+  get movie(): Movie {
+    return this.repo.movie;
+  }
 }

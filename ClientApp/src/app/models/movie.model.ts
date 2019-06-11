@@ -10,5 +10,5 @@ export class Movie {
     public price?: number,
     public studio?: Studio,
     public ratings?: Rating[]) {}
-  )
+
 }
