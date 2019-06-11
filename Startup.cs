@@ -25,7 +25,12 @@ namespace DVDMovieStore
         {
             services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration["Data:Movies:ConnectionString"]));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddMvc().AddJsonOptions(opts => opts.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Serialize);
+            services.AddMvc().AddJsonOptions(opts =>{
+                        opts.SerializerSettings.ReferenceLoopHandling 
+                            = ReferenceLoopHandling.Serialize;
+                        opts.SerializerSettings.NullValueHandling
+                            = NullValueHandling.Ignore;
+                        });
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
