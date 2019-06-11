@@ -3,13 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using DVDMovieStore.Models;
 
 namespace DVDMovieStore.Controllers
 {
     [Route("api/[controller]")]
     public class SampleDataController : Controller
     {
-        private static string[] Summaries = new[]
+        private DataContext context;
+        public SampleDataController(DataContext ctx)
+        {
+            context = ctx;
+        }
+
+        [HttpGet("[action]")]
+        public Movie GetMovie()
+        {
+            return context.Movies.OrderBy(p => p.MovieId).First();
+        }
+
+
+        /* private static string[] Summaries = new[]
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
@@ -39,6 +53,6 @@ namespace DVDMovieStore.Controllers
                     return 32 + (int)(TemperatureC / 0.5556);
                 }
             }
-        }
+        } */
     }
 }
