@@ -10,7 +10,13 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'Web Development with ASP.NET Core and Angular';
   constructor(private repo: Repository) {}
+
   get movie(): Movie {
     return this.repo.movie;
   }
+
+  get movies(): Movie[] {
+    return this.repo.movies;
+  }
+
 }

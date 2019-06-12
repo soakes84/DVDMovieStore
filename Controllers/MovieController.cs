@@ -47,5 +47,46 @@ namespace DVDMovieStore.Controllers
             }
             return result;
         }
+    
+        [HttpGet]
+        public IEnumerable<Movie> GetMovies(string category, string search, bool related = false)
+        {
+            IQueryable<Movie> query = context.Movies;
+            
+            if (!string.IsNullOrWhiteSpace(category))
+            {
+                string catLower = category.ToLower();
+                query = query.Where(m => m.Category.ToLower().Contains(catLower));
+            }
+
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                string searchLower = search.ToLower();
+                query = query.Where(m => m.Name.ToLower().Contains(searchLower)
+                || m.Description.ToLower().ToLower().Contains(searchLower));
+            }
+
+            if (related)
+            {
+                query = query.Include(m => m.Studio).Include(m => m.Ratings);
+                List<Movie> data = query.ToList();
+                data.ForEach(m =>
+                {
+                    if (m.Studio != null)
+                    {
+                        m.Studio = null;
+                    }
+                    if (m.Ratings != null)
+                    {
+                        m.Ratings.ForEach(r => r.Movie = null);
+                    }
+                });
+                return data;
+            }
+            else
+            {
+                return query;
+            }
+        }
     }
 }
