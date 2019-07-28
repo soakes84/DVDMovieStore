@@ -5,7 +5,7 @@ export class Movie {
   constructor(
     public movieId?: number,
     public name?: string,
-    public categort?: string,
+    public category?: string,
     public description?: string,
     public price?: number,
     public studio?: Studio,
