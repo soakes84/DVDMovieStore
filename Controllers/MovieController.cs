@@ -129,7 +129,30 @@ namespace DVDMovieStore.Controllers
             {
                 return BadRequest(ModelState);
             }
+        }
 
+        [HttpPatch("{id}")]
+        public IActionResult UpdateMovie(long id, [FromBody]JsonPatchDocument<MovieData> patch)
+        {
+            Movie movie = context.Movies
+            .include(m => m.Studio)
+            .First(m => m.MovieId == id);
+            MovieData mdata = new MovieData { Movie = movie };
+            patch.ApplyTo(mdata, ModelState);
+
+            if (ModelState.IsValid && TryValidateModle(mdata))
+            {
+                if (movie.Studio != null && movie.Studio.StudioId != 0)
+                {
+                    context.Attach(movie.Studio);
+                }
+                context.SaveChanges();
+                return Ok(movie);
+            }
+            else
+            {
+                return BadRequest(ModelState;)
+            }
         }
     }
 }
