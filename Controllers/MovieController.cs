@@ -110,5 +110,26 @@ namespace DVDMovieStore.Controllers
                 return BadRequest(ModelState);
             }
         }
+
+        [HttpPut]
+        public IActionResult ReplaceMovie(long id, [FromBody] MovieData mData)
+        {
+            if (ModelState.IsValid)
+            {
+                Movie m = mData.Movie;
+                if (m.Studio != null && m.Studio.StudioId != 0)
+                {
+                    context.Attach(m.Studio);
+                }
+                context.Update(m);
+                context.SaveChanges();
+                return Ok();
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
+
+        }
     }
 }
