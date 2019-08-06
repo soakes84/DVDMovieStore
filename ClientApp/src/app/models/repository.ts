@@ -93,4 +93,13 @@ constructor(private http: HttpClient) {
     this.http.put(studiosUrl + '/' + stu.studioId, data)
     .subscribe(response => this.getMovies());
   }
+
+  updateMovie(id: number, changes: Map<string, any>) {
+    // tslint:disable-next-line:prefer-const
+    let patch = [];
+    changes.forEach((value, key) =>
+    patch.push({ op: 'replace', path: key, value: value }));
+    this.http.patch(moviesUrl + '/' + id, patch)
+    .subscribe(response => this.getMovies());
+  }
 }
