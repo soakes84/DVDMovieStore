@@ -116,15 +116,15 @@ namespace DVDMovieStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                Movie m = mData.Movie;
-                m.MovieId = id;
-                if (m.Studio != null && m.Studio.StudioId != 0)
-                {
-                    context.Attach(m.Studio);
-                }
-                context.Update(m);
+                Studio s = sdata.Studio;
+                s.StudioId = id;
+                context.Update(s);
                 context.SaveChanges();
                 return Ok();
+            }
+            else
+            {
+                return BadRequest(ModelState);
             }
         }
     }
