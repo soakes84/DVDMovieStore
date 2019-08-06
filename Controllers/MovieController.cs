@@ -65,7 +65,7 @@ namespace DVDMovieStore.Controllers
             {
                 string searchLower = search.ToLower();
                 query = query.Where(m => m.Name.ToLower().Contains(searchLower)
-                || m.Description.ToLower().ToLower().Contains(searchLower));
+                || m.Description.ToLower().Contains(searchLower));
             }
 
             if (related)
@@ -76,7 +76,7 @@ namespace DVDMovieStore.Controllers
                 {
                     if (m.Studio != null)
                     {
-                        m.Studio = null;
+                        m.Studio.Movies = null;
                     }
                     if (m.Ratings != null)
                     {
@@ -104,23 +104,6 @@ namespace DVDMovieStore.Controllers
                 context.Add(m);
                 context.SaveChanges();
                 return Ok(m.MovieId);
-            }
-            else
-            {
-                return BadRequest(ModelState);
-            }
-        }
-
-        [HttpPut("id")]
-        public IActionResult ReplaceMovie(long id, [FromBody] Movie Data mData)
-        {
-            if (ModelState.IsValid)
-            {
-                Studio s = sdata.Studio;
-                s.StudioId = id;
-                context.Update(s);
-                context.SaveChanges();
-                return Ok();
             }
             else
             {

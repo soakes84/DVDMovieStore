@@ -36,4 +36,17 @@ export class AppComponent {
     this.repo.createMovieAndStudio(m, s);
   }
 
+  replaceMovie() {
+    // tslint:disable-next-line:prefer-const
+    let m = this.repo.movies[0];
+    m.name = 'Modified Movie';
+    m.category = 'Modified Category';
+    this.repo.replaceMovie(m);
+  }
+  replaceStudio() {
+    // tslint:disable-next-line:prefer-const
+    let s = new Studio(3, 'Modified Studio', 'New York', 'NY');
+    this.repo.replaceStudio(s);
+  }
+
 }
