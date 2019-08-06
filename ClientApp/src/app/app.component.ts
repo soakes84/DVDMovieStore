@@ -2,6 +2,7 @@ import { Movie } from './models/movie.model';
 import { Repository } from './models/repository';
 import { Component } from '@angular/core';
 import { Studio } from './models/studio.model';
+import { stringify } from 'querystring';
 
 
 @Component({
@@ -47,6 +48,15 @@ export class AppComponent {
     // tslint:disable-next-line:prefer-const
     let s = new Studio(3, 'Modified Studio', 'New York', 'NY');
     this.repo.replaceStudio(s);
+  }
+
+  updateMovie() {
+    // tslint:disable-next-line:prefer-const
+    let changes = new Map<string, any>();
+    changes.set('name', 'Last Dance');
+    changes.set('studio', null);
+    this.repo.updateMovie(1, changes);
+
   }
 
 }
