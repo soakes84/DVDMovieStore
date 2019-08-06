@@ -36,7 +36,7 @@ namespace DVDMovieStore.Controllers
         }
 
         [HttpPut("id")]
-        public IActionResult ReplaceStudio(long id, [FromBody] Movie Data mData)
+        public IActionResult ReplaceStudio(long id, [FromBody] StudioData sdata)
         {
             if (ModelState.IsValid)
             {

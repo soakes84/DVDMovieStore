@@ -30,7 +30,7 @@ constructor(private http: HttpClient) {
   }
 
   getMovies(related = false) {
-    let url = moviesUrl + 'related=' + this.filter.related;
+    let url = moviesUrl + '?related=' + this.filter.related;
     if (this.filter.category) {
       url += '&category=' + this.filter.category;
     }
