@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using DVDMovieStore.Models;
 using Microsoft.EntityFrameworkCore;
 using DVDMovieStore.Models.BindingTargets;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace DVDMovieStore.Controllers
 {
@@ -135,12 +136,12 @@ namespace DVDMovieStore.Controllers
         public IActionResult UpdateMovie(long id, [FromBody]JsonPatchDocument<MovieData> patch)
         {
             Movie movie = context.Movies
-            .include(m => m.Studio)
+            .Include(m => m.Studio)
             .First(m => m.MovieId == id);
             MovieData mdata = new MovieData { Movie = movie };
             patch.ApplyTo(mdata, ModelState);
 
-            if (ModelState.IsValid && TryValidateModle(mdata))
+            if (ModelState.IsValid && TryValidateModel(mdata))
             {
                 if (movie.Studio != null && movie.Studio.StudioId != 0)
                 {
@@ -151,7 +152,7 @@ namespace DVDMovieStore.Controllers
             }
             else
             {
-                return BadRequest(ModelState;)
+                return BadRequest(ModelState);
             }
         }
     }
