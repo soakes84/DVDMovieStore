@@ -11,4 +11,7 @@ export class MovieTableComponent {
   get movies(): Movie[] {
     return this.repo.movies;
   }
+  selectMovie(id: number) {
+    this.repo.getMovie(id);
+  }
 }

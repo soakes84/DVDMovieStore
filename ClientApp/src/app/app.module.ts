@@ -1,3 +1,4 @@
+import { MovieDetailComponent } from './structure/movieDetail.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -9,6 +10,7 @@ import { CategoryFilterComponent } from './structure/categoryFilter.component';
 
 @NgModule({
   declarations: [
+    MovieDetailComponent,
     MovieTableComponent,
     CategoryFilterComponent,
     AppComponent
